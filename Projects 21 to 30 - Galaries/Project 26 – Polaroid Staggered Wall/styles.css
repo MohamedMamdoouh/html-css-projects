@@ -1,0 +1,250 @@
+:root {
+    --bg: #fbfbfb;
+    --ink: #111827;
+    --muted: #6b7280;
+
+    --accent: #2563eb;
+    --card: #ffffff;
+    --border: #e5e7eb;
+
+    --shadow-rest: 0 10px 24px rgba(0, 0, 0, .12);
+    --shadow-up: 0 18px 36px rgba(0, 0, 0, .18);
+
+    --maxw: 1200px;
+    --radius: 14px;
+
+    --col-gap: 1.25rem;
+    --frame-pad: .65rem;
+    --frame-pad-bottom: 1.05rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f1319;
+        --ink: #e6e8ec;
+        --muted: #9aa2b2;
+
+        --accent: #60a5fa;
+        --card: #161b22;
+        --border: #232a34;
+
+        --shadow-rest: 0 16px 36px rgba(0, 0, 0, .55);
+        --shadow-up: 0 22px 48px rgba(0, 0, 0, .55);
+    }
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.72;
+}
+
+header {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 2rem 1rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.masthead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.masthead h1 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    letter-spacing: .2px;
+}
+
+.dek {
+    margin: .35rem 0 0;
+    color: var(--muted);
+    max-width: 65ch;
+}
+
+nav.pills {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+}
+
+.pills a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: .45rem .8rem;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.pills a:hover {
+    background: rgba(37, 99, 235, .08);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, .15);
+}
+
+.wall {
+    max-width: var(--maxw);
+    margin: 1.25rem auto 2.5rem;
+    padding: 0 1rem;
+    column-count: 3;
+    column-gap: var(--col-gap);
+}
+
+@media (max-width: 1100px) {
+    .wall {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 720px) {
+    .wall {
+        column-count: 1;
+    }
+}
+
+.polaroid {
+    display: inline-block;
+    width: 100%;
+    break-inside: avoid;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-rest);
+    margin: 0 0 var(--col-gap);
+    padding: var(--frame-pad) var(--frame-pad) var(--frame-pad-bottom);
+    transform: rotate(var(--tilt, 0deg));
+    transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.polaroid:nth-child(6n+1) {
+    --tilt: -1.5deg;
+}
+
+.polaroid:nth-child(6n+2) {
+    --tilt: 1.2deg;
+}
+
+.polaroid:nth-child(6n+3) {
+    --tilt: -0.9deg;
+}
+
+.polaroid:nth-child(6n+4) {
+    --tilt: 1.6deg;
+}
+
+.polaroid:nth-child(6n+5) {
+    --tilt: -1.8deg;
+}
+
+.polaroid:nth-child(6n+6) {
+    --tilt: 0.8deg;
+}
+
+.polaroid:hover,
+.polaroid:focus-within {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: var(--shadow-up);
+    z-index: 1;
+}
+
+.photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: calc(var(--radius) - 6px);
+    display: block;
+    filter: saturate(.96) contrast(1.02);
+    transition: filter .28s ease, transform .28s ease;
+}
+
+.polaroid:hover .photo,
+.polaroid:focus-within .photo {
+    filter: saturate(1.05) contrast(1.06);
+    transform: scale(1.01);
+}
+
+/* Caption strip: HIDDEN by default; appears ONLY on hover/focus */
+.strip {
+    position: relative;
+    margin-top: .6rem;
+    padding: .45rem .55rem;
+    border-radius: 8px;
+    border: 1px dashed transparent;
+    color: var(--muted);
+    font-size: .95rem;
+    background: transparent;
+
+    /* Hidden state */
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .28s ease, transform .28s ease, border-color .28s ease, background .28s ease;
+}
+
+.polaroid:hover .strip,
+.polaroid:focus-within .strip {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: rgba(37, 99, 235, .35);
+    background: rgba(37, 99, 235, .06);
+}
+
+.kicker {
+    display: inline-block;
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .25rem;
+}
+
+a,
+button {
+    outline: none;
+}
+
+.polaroid:focus-within {
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, .32),
+        0 0 0 6px rgba(37, 99, 235, .18),
+        var(--shadow-up);
+}
+
+@media print {
+    @page {
+        margin: 14mm;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    nav.pills {
+        display: none !important;
+    }
+
+    .polaroid {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .strip {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

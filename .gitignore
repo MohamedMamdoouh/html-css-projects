@@ -1,0 +1,8 @@
+# HTML & CSS Projects
+# IDE
+.vscode/
+.idea/
+
+# Misc
+.DS_Store
+Thumbs.db
